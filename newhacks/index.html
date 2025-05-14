@@ -1,0 +1,128 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FiveM Skillchecks</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Inline override: display result rows as flex with button inline */
+    #sentenceResults .result-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 8px 0;
+    }
+    #sentenceResults .result-item button {
+      flex-shrink: 0;
+      margin-left: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>EchoRP Hacks</h1>
+  </header>
+
+  <main class="container">
+    <div class="card" onclick="navigateTo('game1/index.html')">
+      <h3>Fleeca Green Card</h3>
+      <p>Greencard hack for Fleeca Banks. Click on different colors/shapes. Like Candy Crush!</p>
+    </div>
+    <div class="card" onclick="navigateTo('game3/index.html')">
+      <h3>Fleeca Red Dot Game</h3>
+      <p>Click the red dot's and enter the letter</p>
+    </div>
+    <div class="card" onclick="navigateTo('game10/index.html')">
+      <h3>Fleeca Icon Game</h3>
+      <p>Count the icon falling</p>
+    </div>
+    <div class="card" onclick="navigateTo('game6/index.html')">
+      <h3>Fleeca Teller Door</h3>
+      <p>Keypad to open teller door</p>
+    </div>
+    <div class="card" onclick="navigateTo('game9/index.html')">
+      <h3>Fleeca Teller Computer</h3>
+      <p></p>
+    </div>
+    <div class="card" onclick="navigateTo('game4/index.html')">
+      <h3>Store Hack</h3>
+      <p>Click 1 to 20 while numbers change position</p>
+    </div>
+    <div class="card" onclick="toggleStoreHelper()">
+      <h3>Store Code Cracker</h3>
+      <p>Brute-force helper for 4-digit store codes</p>
+    </div>
+    <div class="card" onclick="navigateTo('game5/index.html')">
+      <h3>Thermite</h3>
+      <p></p>
+    </div>
+    <div class="card" onclick="navigateTo('game7/index.html')">
+      <h3>G6 Purple Card</h3>
+      <p></p>
+    </div>
+    <div class="card" onclick="navigateTo('game8/index.html')">
+      <h3>Color Hack</h3>
+      <p>Old Fleeca Drill Hack</p>
+    </div>
+    <div class="card" onclick="navigateTo('game2/index.html')">
+      <h3>New Game</h3>
+      <p>Unknown Location</p>
+    </div>
+    <div class="card" onclick="toggleVladModule()">
+      <h3>Vangies Hack</h3>
+      <p></p>
+    </div>
+    <div class="card" onclick="toggleSentenceHelper()">
+      <h3>Find Sentence Helper</h3>
+      <p>Type to search sentences and copy quickly</p>
+    </div>
+  </main>
+
+  <!-- Sentence Helper Modal -->
+  <div id="sentenceHelperModal" class="modal">
+    <div class="modal-content">
+      <h2>Find Sentence</h2>
+      <input type="text" id="sentenceInput" placeholder="Type or paste scrambled text..." />
+      <div id="sentenceResults" class="results"></div>
+      <button onclick="closeSentenceHelper()">Close</button>
+    </div>
+  </div>
+
+  <!-- Store Helper Modal -->
+  <div id="storeHelperModal" class="modal">
+    <div class="modal-content">
+      <h2>Enter 4-digit Code</h2>
+      <input id="storeInput" maxlength="4" />
+      <br />
+      <button onclick="generateStoreCodes()">Generate</button>
+      <button onclick="closeStoreHelper()">Close</button>
+      <div id="storeOutput"></div>
+  </div>
+
+  <!-- Vlad Hack Modal -->
+  <div id="vladModuleModal" class="modal">
+    <div class="modal-content vlad-module">
+      <h2>Vangies Hack</h2>
+      <h4>Start with typing ls</h4>
+      <label>Insert IP:</label>
+      <input type="text" id="vlad-ip" value="193.9.210.196" />
+      <label>Insert Port:</label>
+      <input type="text" id="vlad-port" value="15864" />
+      <label>Insert Moneyfile Name:</label>
+      <input type="text" id="vlad-moneyfile" value="MalwareHunter.bin" />
+      <label>Insert Attack File Name:</label>
+      <input type="text" id="vlad-attackfile" value="AtmJammer.dll" />
+      <br />
+      <button onclick="generateVladCommands()">Generate Commands</button>
+      <button onclick="closeVladModule()">Close</button>
+      <div id="vlad-output" class="terminal-output"></div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+  <script src="sentenceUnscramble.js"></script>
+</body>
+</html>

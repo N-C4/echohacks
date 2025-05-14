@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Exo Thermite Minigame by Snipe</title>
+	<meta name="description" content="Exo Thermite Minigame by Snipe">
+	<!-- <link rel="canonical" href="index.html" /> -->
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+</head>
+    <body>
+        <div id="mode-selector" class="overlay">
+            <div class="modal">
+              <h2>Select Minigame</h2>
+              <button data-mode="paleto">Paleto (7×7,20,5,5s,10s)</button>
+              <button data-mode="vangies">Vangies (8×8,15,5,5s,15s)</button>
+              <button data-mode="vault">Vault   (8×8,15,5,5s,10s)</button>
+              <button data-mode="custom">Custom…</button>
+            </div>
+          </div>
+          <!-- Custom Configuration Overlay -->
+        <div id="custom-config" class="overlay hidden">
+            <div class="modal">
+            <h2>Custom Configuration</h2>
+            <label>
+                Grid Size:
+                <input type="number" id="custom-size" min="2" max="20" value="7">
+            </label>
+            <label>
+                Correct Blocks:
+                <input type="number" id="custom-correct" min="1" value="5">
+            </label>
+            <label>
+                Max Incorrect:
+                <input type="number" id="custom-incorrect" min="0" value="3">
+            </label>
+            <label>
+                Show Time (s):
+                <input type="number" id="custom-showtime" min="1" value="5">
+            </label>
+            <label>
+                Lose Time (s):
+                <input type="number" id="custom-losetime" min="1" value="10">
+            </label>
+            <div class="actions">
+                <button id="custom-back">Back</button>
+                <button id="custom-start">Start Game</button>
+            </div>
+            </div>
+        </div>
+        <div class="container" style="display: none;">
+            <div class="grid" id="grid">
+                <div class="block block-1"></div>
+                <div class="block block-2"></div>
+                <div class="block block-3"></div>
+                <div class="block block-4"></div>
+                <div class="block block-5"></div>
+                <div class="block block-6"></div>
+                <div class="block block-7"></div>
+                <div class="block block-8"></div>
+                <div class="block block-9"></div>
+                <div class="block block-10"></div>
+                <div class="block block-11"></div>
+                <div class="block block-12"></div>
+                <div class="block block-13"></div>
+                <div class="block block-14"></div>
+                <div class="block block-15"></div>
+                <div class="block block-16"></div>
+                <div class="block block-17"></div>
+                <div class="block block-18"></div>
+                <div class="block block-19"></div>
+                <div class="block block-20"></div>
+                <div class="block block-21"></div>
+                <div class="block block-22"></div>
+                <div class="block block-23"></div>
+                <div class="block block-24"></div>
+                <div class="block block-25"></div>
+                <div class="block block-26"></div>
+                <div class="block block-27"></div>
+                <div class="block block-28"></div>
+                <div class="block block-29"></div>
+                <div class="block block-30"></div>
+                <div class="block block-31"></div>
+                <div class="block block-32"></div>
+                <div class="block block-33"></div>
+                <div class="block block-34"></div>
+                <div class="block block-35"></div>
+                <div class="block block-36"></div>
+                <div class="block block-37"></div>
+                <div class="block block-38"></div>
+                <div class="block block-39"></div>
+                <div class="block block-40"></div>
+                <div class="block block-41"></div>
+                <div class="block block-42"></div>
+                <div class="block block-43"></div>
+                <div class="block block-44"></div>
+                <div class="block block-45"></div>
+                <div class="block block-46"></div>
+                <div class="block block-47"></div>
+                <div class="block block-48"></div>
+                <div class="block block-49"></div>
+                <div class="block block-50"></div>
+                <div class="block block-51"></div>
+                <div class="block block-52"></div>
+                <div class="block block-53"></div>
+                <div class="block block-54"></div>
+                <div class="block block-55"></div>
+                <div class="block block-56"></div>
+                <div class="block block-57"></div>
+                <div class="block block-58"></div>
+                <div class="block block-59"></div>
+                <div class="block block-60"></div>
+                <div class="block block-61"></div>
+                <div class="block block-62"></div>
+                <div class="block block-63"></div>
+                <div class="block block-64"></div>
+                <div class="block block-65"></div>
+                <div class="block block-66"></div>
+                <div class="block block-67"></div>
+                <div class="block block-68"></div>
+                <div class="block block-69"></div>
+                <div class="block block-70"></div>
+                <div class="block block-71"></div>
+                <div class="block block-72"></div>
+            </div>
+            <script src="./app.js"></script>
+        </div>
+    </body>
+</html>

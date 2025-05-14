@@ -1,0 +1,159 @@
+/* 
+  --------------------------------------------------
+  PAGE BACKGROUND 
+  --------------------------------------------------
+  Make sure to replace the 'url(...)' path with 
+  your actual honeycomb image path.
+*/
+body {
+    margin: 0;
+    padding: 0;
+    color: white;
+    font-family: 'Oswald', sans-serif;
+    
+    /* Honeycomb background behind everything */
+    background: #15181d url("/public/media/background.48fb4f55492c4ec52343.png") no-repeat center center fixed;
+    background-size: cover;
+  }
+  
+  /* 
+    --------------------------------------------------
+    APP CONTAINER STYLES
+    --------------------------------------------------
+  */
+  .appContainer {
+    /* If you want the “window” centered vertically:
+       Use flex on body or a wrapper. Alternatively, 
+       you can just push it down with margin. */
+    
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    
+    /* If you want full height so you can center it easily: */
+    min-height: 100vh;
+  }
+  
+  .secBypass {
+    background: rgba(21,24,29,0.9); /* Slightly transparent overlay for effect */
+    border: 1px solid #2a2e34;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.7);
+    width: 700px; /* Adjust as needed */
+    min-height: 500px; /* Adjust for your content */
+    display: flex;
+    flex-direction: column;
+  }
+  
+  /* 
+    --------------------------------------------------
+    HEADER STYLES
+    --------------------------------------------------
+  */
+  .header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #20282e;
+    padding: 10px;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+  
+  .logoName {
+    display: flex;
+    align-items: center;
+  }
+  
+  .logoName img {
+    width: 40px;
+    height: 40px;
+    margin-right: 10px;
+    border-radius: 20%;
+  }
+  
+  .appControls svg {
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* 
+    --------------------------------------------------
+    MAIN CONTENT AREA 
+    --------------------------------------------------
+  */
+  .hack-container {
+    flex: 1;
+    padding: 20px;
+    text-align: center;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  /* 
+    --------------------------------------------------
+    MANUAL AUTH BUTTON 
+    --------------------------------------------------
+  */
+  .button {
+    background-color: #028000;
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+    font-size: 1rem;
+    transition: background-color 0.2s ease;
+  }
+  
+  .button:hover {
+    background-color: #425e79;
+  }
+  
+  /* 
+    --------------------------------------------------
+    GAME DISPLAY
+    --------------------------------------------------
+  */
+  .fw-header,
+  .fw-timer {
+    font-size: 20px;
+    margin-bottom: 10px;
+  }
+  
+  .fw-targetGround {
+    position: relative;
+    width: 600px;
+    height: 450px;
+    margin: 0 auto;
+    background-color: #20282e;
+    border: 1px solid #2a2e34;
+    border-radius: 5px;
+    overflow: hidden; /* keep the target inside */
+  }
+  
+  /* The circle that moves around */
+  .fw-target {
+    position: absolute;
+    background-color: #ff0000;
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* The large letter that appears over the circle */
+  .fw-challengerNumber {
+    position: absolute;
+    font-size: 220px; 
+    font-weight: bold;
+    color: rgba(0, 255, 0, 0.1); 
+    text-align: center;
+    width: 100%;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-transform: uppercase; 
+    pointer-events: none;
+  }
+  
