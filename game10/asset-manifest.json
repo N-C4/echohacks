@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/web/build/static/css/main.fcbbc076.css",
+    "main.js": "/web/build/static/js/main.da2fdaa2.js",
+    "static/media/overlay.png": "/web/build/static/media/overlay.557baf44071ec2af5f32.png",
+    "static/media/background.png": "/web/build/static/media/background.48fb4f55492c4ec52343.png",
+    "static/media/FontsFree-Net-SFCompactDisplay-Bold.ttf": "/web/build/static/media/FontsFree-Net-SFCompactDisplay-Bold.df9342bebd2ac4ac0fba.ttf",
+    "static/media/FontsFree-Net-SFCompactDisplay-Medium.ttf": "/web/build/static/media/FontsFree-Net-SFCompactDisplay-Medium.9be8a8035e71fc9f8d0b.ttf",
+    "static/media/FontsFree-Net-SFCompactDisplay-Regular.ttf": "/web/build/static/media/FontsFree-Net-SFCompactDisplay-Regular.530b588c1d3257df5fbf.ttf",
+    "static/media/ShellBase.png": "/web/build/static/media/ShellBase.e1c7d55cf2649a7351bc.png",
+    "static/media/Invalid.png": "/web/build/static/media/Invalid.a59f5a3ebe883669eb8e.png",
+    "static/media/Mystery.png": "/web/build/static/media/Mystery.7cc8674e5550bccb9ffc.png",
+    "index.html": "/web/build/index.html",
+    "main.fcbbc076.css.map": "/web/build/static/css/main.fcbbc076.css.map",
+    "main.da2fdaa2.js.map": "/web/build/static/js/main.da2fdaa2.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.fcbbc076.css",
+    "static/js/main.da2fdaa2.js"
+  ]
+}

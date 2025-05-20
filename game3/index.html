@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Firewall Game</title>
+  
+  <!-- GOOGLE FONTS -->
+  <link
+    href="https://fonts.googleapis.com/css2?family=Oswald:wght@700&display=swap"
+    rel="stylesheet"
+  />
+  
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+  <!-- Firebase (core + auth), if you need them -->
+  <script src="https://www.gstatic.com/firebasejs/9.11.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/9.11.0/firebase-auth-compat.js"></script>
+
+  <!-- Your stylesheet -->
+  <link rel="stylesheet" href="css/style.css" />
+
+  <!-- Your Firebase init/auth check (adapt paths as needed) -->
+</head>
+<body>
+  <div class="appContainer">
+    <div class="secBypass">
+      <!-- Top Window Header -->
+      <div class="header">
+        <div class="logoName">
+          <img src="/public/media/Firewall.png" alt="Logo" />
+          <span>Firewall</span>
+        </div>
+        <div class="appControls">
+          <!-- Minimize button -->
+          <svg id="minimize" width="17" height="2" viewBox="0 0 17 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.0810547" y="0.539062" width="16" height="0.8" rx="0.4" fill="white" />
+          </svg>
+          <!-- Close button -->
+          <svg id="close" width="13" height="13" viewBox="0 0 13 13" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <rect x="0.707275" width="16" height="0.8" rx="0.4" transform="rotate(45 0.707275 0)" fill="white" />
+            <rect x="0.192627" y="11.4844" width="16" height="0.8" rx="0.4" transform="rotate(-45 0.192627 11.4844)" fill="white" />
+          </svg>
+        </div>
+      </div>
+
+      <!-- Main Content -->
+      <div class="hack-container">
+        <!-- “Manual Authorization” Screen -->
+        <div id="initiate">
+          <div id="statusMessage" style="margin-top:100px;">
+            <svg xmlns="http://www.w3.org/2000/svg" width='75px' height='75px' viewBox="0 0 640 512">
+              <path
+                d="M320 0c17.7 0 32 14.3 32 32V96H472c39.8 0 72 32.2 72 72V440c0 39.8-32.2 72-72 72H168c-39.8 0-72-32.2-72-72V168c0-39.8 32.2-72 72-72H288V32c0-17.7 14.3-32 32-32zM208 384c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H208zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H304zm96 0c-8.8 0-16 7.2-16 16s7.2 16 16 16h32c8.8 0 16-7.2 16-16s-7.2-16-16-16H400zM264 256a40 40 0 1 0 -80 0 40 40 0 1 0 80 0zm152 40a40 40 0 1 0 0-80 40 40 0 1 0 0 80zM48 224H64V416H48c-26.5 0-48-21.5-48-48V272c0-26.5 21.5-48 48-48zm544 0c26.5 0 48 21.5 48 48v96c0 26.5-21.5 48-48 48H576V224h16z"
+                fill="white"
+              />
+            </svg>
+            <div id="statusText" style="font-size:32px;">Manual Authorization Required!</div>
+            <div id="startButton" class="button" style="flex: 0.5; margin: 20;">
+              CLICK TO START MANUAL AUTHORIZATION
+            </div>
+          </div>
+        </div>
+
+        <!-- Actual Game Screen -->
+        <div id="firewall-container" class="hidden">
+          <div class="fw-header">
+            Strikes : <span id="strikes">0</span>/3 |
+            Score : <span id="score">0</span> |
+            Target : <span id="target">25</span>
+          </div>
+          <div class="fw-timer">
+            Time : <span id="remainingSeconds">35</span> seconds
+          </div>
+          <div class="fw-targetGround" id="missClick">
+            <div class="fw-target" id="targetCircle"
+                 style="width: 25px; height: 25px; margin-left: 0px; margin-top: 0px;">
+            </div>
+            <div id="challengerNumber" class="fw-challengerNumber hidden"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Your main JS file -->
+  <script src="js/firewall.js"></script>
+</body>
+</html>
