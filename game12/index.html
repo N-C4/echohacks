@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Hacking Terminal</title>
+  <style>
+    body {
+      background: black;
+      color: #00ff00;
+      font-family: monospace;
+      padding: 0;
+      margin: 0;
+    }
+
+    .atmHackContainer {
+      width: 100%;
+      height: 100vh;
+      padding: 10px;
+      box-sizing: border-box;
+      overflow-y: auto;
+      white-space: pre-wrap;
+    }
+
+    .line {
+      margin: 2px 0;
+    }
+
+    .prompt {
+      display: inline;
+    }
+
+    .input-line {
+      display: flex;
+      gap: 6px;
+      align-items: center;
+    }
+
+    .input-line input {
+      background: black;
+      color: #00ff00;
+      border: none;
+      outline: none;
+      font-family: monospace;
+      font-size: 1em;
+      width: 100%;
+    }
+
+    .syncingBar {
+      display: inline-block;
+      width: 200px;
+      height: 10px;
+      border: 1px solid #00ff00;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .syncingBar::before {
+      content: "";
+      position: absolute;
+      width: 40px;
+      height: 100%;
+      background: #00ff00;
+      animation: syncing 1s linear infinite;
+    }
+
+    @keyframes syncing {
+      0% { left: -40px; }
+      100% { left: 200px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="atmHackContainer" id="terminal"></div>
+
+  <script>
+    // ---------- Utilities ----------
+    function generateIPAddress() {
+      return Array(4).fill(0).map(() => Math.floor(Math.random() * 256)).join(".");
+    }
+
+    function generatePortNumber() {
+      return Math.floor(Math.random() * 65535) + 1;
+    }
+
+    function parseSSHString(sshString) {
+      const regex = /^(\w+)@([\d.]+):(\d+)$/;
+      const match = sshString ? sshString.match(regex) : null;
+      return match ? { user: match[1], ip: match[2], port: parseInt(match[3], 10) } : null;
+    }
+
+    function generateRandomName(names) {
+      const extensions = [".exe", ".dll", ".sys", ".bin"];
+      return names[Math.floor(Math.random() * names.length)] + extensions[Math.floor(Math.random() * extensions.length)];
+    }
+
+    function insertName(originalString, name) {
+      const lines = originalString.trim().split("\n");
+      const randomPosition = Math.floor(Math.random() * lines.length);
+      return lines.map((line, index) => index === randomPosition ? line + "\t" + name : line).join("\n");
+    }
+
+    function sleep(ms) {
+      return new Promise(res => setTimeout(res, ms));
+    }
+
+    // ---------- Data ----------
+    const ipGrabberNames = ["IpGrabber","AtmIp","DataTracker","NetworkScanner","PacketSniffer","ConnectionMonitor","TrafficAnalyzer","ProxyDetector","VulnerabilityScanner","FirewallGuard","MalwareHunter","PortScanner","BandwidthMonitor","LogAnalyzer","PacketInspector","ProtocolAnalyzer","SecurityAuditor","IntrusionDetector","DataLogger","NetworkMonitor"];
+    const rainMoneyNames = ["MoneyRain","SpazAtm","AtmJammer","MakeItRain","BritishWeather","GiveMoney","CashGiver","CashRain","XXXMoney","WithdrawMillion","GlitchAtm","AtmGlitcher","AttackAtm"];
+
+    const defaultBoot = [
+      { text: "Welcome to ATM Hacking Terminal v1.0", delay: 500 },
+      { text: "Looking for synced bluetooth device...", delay: 1000 },
+      { text: "Device found, syncing data now", delay: 2000 },
+      { html: '<div class="syncingBar"></div>', delay: 2000 },
+      { text: "Data synced", delay: 1000 }
+    ];
+
+    // ---------- State ----------
+    const terminal = document.getElementById("terminal");
+    let account = "anon@echo";
+    let ipAddress = generateIPAddress();
+    let port = generatePortNumber();
+    let ipFileGrab = generateRandomName(ipGrabberNames);
+    let rainMoneyFile = generateRandomName(rainMoneyNames);
+
+    let fileTransfered = false;
+    let bypassed = false;
+
+    // ---------- Terminal Helpers ----------
+    function addLine(content, isHTML = false) {
+      const div = document.createElement("div");
+      div.className = "line";
+      if (isHTML) {
+        div.innerHTML = content;
+      } else {
+        div.textContent = content;
+      }
+      terminal.appendChild(div);
+      terminal.scrollTop = terminal.scrollHeight;
+    }
+
+    function showPrompt() {
+      const form = document.createElement("form");
+      form.className = "input-line";
+
+      const span = document.createElement("span");
+      span.className = "prompt";
+      span.textContent = `${account}:~$`;
+
+      const input = document.createElement("input");
+      input.type = "text";
+      input.autofocus = true;
+
+      form.appendChild(span);
+      form.appendChild(input);
+      terminal.appendChild(form);
+      terminal.scrollTop = terminal.scrollHeight;
+
+      input.focus();
+
+      form.addEventListener("submit", e => {
+        e.preventDefault();
+        const command = input.value.trim();
+        if (command) {
+          form.remove();
+          handleCommand(command);
+        }
+      });
+    }
+
+    // ---------- Boot Sequence ----------
+    async function boot() {
+      for (let msg of defaultBoot) {
+        await sleep(msg.delay);
+        if (msg.text) addLine(msg.text);
+        if (msg.html) addLine(msg.html, true);
+      }
+      showPrompt();
+    }
+
+    // ---------- Command Handling ----------
+    async function handleCommand(input) {
+      addLine(`${account}:~$ ${input}`);
+      const [command, ...params] = input.split(" ");
+
+      // commands list
+      if (command === "commands") {
+        addLine(account !== "anon@echo" ? "Available commands: ls, clear, exit" : "Available commands: ls, nmap, sshnuke, clear, commands, scp, ssh, exit");
+      }
+
+      // ls
+      else if (command === "ls") {
+        if (account === "anon@echo") {
+          const apps = insertName(
+            "d-r---\t1938\tGallery.exe\n" +
+            "d-r---\t384\tNotifications.exe\n" +
+            "d-r---\t48934\tInstagram.exe\n" +
+            "d-r---\t10\tTwitter.exe\n" +
+            "d-r---\t539\tSqueak.exe\n" +
+            "d-r---\t8372\tGarage.exe\n" +
+            "d-r---\t10092\tBanking.exe\n",
+            "\nd-r---\t69\t" + ipFileGrab
+          );
+          addLine("Mode\tLength\tName");
+          addLine(insertName(apps, "\nd-r---\t10\t" + rainMoneyFile));
+        } else {
+          let apps = "d-r---\t138473\tSecurity.exe\n" + "d-r---\t20\tReadMe.md\n";
+          addLine("Mode\tLength\tName");
+          if (fileTransfered) {
+            apps = insertName(apps, "\nd-r---\t69\t" + rainMoneyFile);
+          }
+          addLine(apps);
+        }
+      }
+
+      // clear
+      else if (command === "clear") {
+        terminal.innerHTML = "";
+      }
+
+      // exit
+      else if (command === "exit") {
+        addLine("Exiting...");
+        // hook goBackPage here if needed
+      }
+
+      // ipFileGrab execution
+      else if (input === ipFileGrab && account === "anon@echo") {
+        addLine("Accessing data obtained from bluetooth device...");
+        await sleep(1500);
+        addLine(`Data obtained, IP address is ${ipAddress}`);
+      }
+
+      // rainMoneyFile execution
+      else if (input === rainMoneyFile && account !== "anon@echo" && fileTransfered) {
+        addLine("Working magic...");
+        await sleep(2000);
+        addLine("Complete! Bye bye...");
+        // hook fetchNui / goBackPage here
+      }
+
+      // nmap
+      else if (command === "nmap" && account === "anon@echo") {
+        const targetIp = params[0];
+        if (targetIp && targetIp === ipAddress) {
+          addLine(`Found open ports on ${ipAddress}`);
+          addLine("");
+          addLine("PORT\tSTATE\tSERVICE\t VERSION");
+          addLine(`${port}\topen\tssh\t 1.0`);
+          addLine("");
+        } else if (targetIp) {
+          addLine("nmap: access denied");
+          // triggerAtmAlarm could go here
+        } else {
+          addLine("Usage: nmap [ip address]");
+        }
+      }
+
+      // sshnuke
+      else if (command === "sshnuke" && account === "anon@echo") {
+        const targetIp = params[0];
+        const targetPort = params[1];
+        if (targetIp === ipAddress && targetPort === `-port=${port}`) {
+          addLine("Nuking SSH:");
+          await sleep(1000); addLine(`Connecting to ${ipAddress}...`);
+          await sleep(2000); addLine("Connected - attempting to exploit SSHv1 CRC32");
+          await sleep(1000); addLine("SSH exploited, disabling system password");
+          await sleep(1000); addLine("Password disabled... whitelisting phone IP");
+          await sleep(1000); addLine("Exploit complete, full access granted.");
+          bypassed = true;
+        } else if (targetIp && targetPort) {
+          addLine("sshnuke: access denied");
+          // triggerAtmAlarm could go here
+        } else {
+          addLine("Usage: sshnuke [ip address] [-port=port]");
+        }
+      }
+
+      // ssh
+      else if (command === "ssh" && account === "anon@echo") {
+        const parsed = parseSSHString(params[0]);
+        if (!parsed) {
+          addLine("Usage: ssh [user@]host[:port]]");
+        } else if (parsed.user === "root" && parsed.ip === ipAddress && parsed.port === port && bypassed) {
+          account = `${parsed.user}@${parsed.ip}`;
+          addLine(`Connected to ${account}`);
+        } else {
+          addLine(`ssh: connect to host ${parsed.ip} port ${parsed.port}: Network is unreachable`);
+        }
+      }
+
+      // scp
+      else if (command === "scp" && account === "anon@echo") {
+        const targetFile = params[0];
+        const parsed = parseSSHString(params[1]);
+        if (!targetFile || !parsed) {
+          addLine("Usage: scp [file] [user@]host[:port]]");
+        } else if (parsed.user === "root" && parsed.ip === ipAddress && parsed.port === port && bypassed) {
+          addLine(`Transferring file ${targetFile}...`);
+          await sleep(1500);
+          addLine(`File ${targetFile} transfered to ${ipAddress}`);
+          fileTransfered = true;
+        } else {
+          addLine(`scp: connect to host ${parsed.ip} port ${parsed.port}: Network is unreachable`);
+        }
+      }
+
+      // fallback
+      else {
+        addLine("Invalid command");
+      }
+
+      showPrompt();
+    }
+
+    // ---------- Start ----------
+    boot();
+  </script>
+</body>
+</html>

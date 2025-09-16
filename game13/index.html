@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>ATM Hack Step-by-Step Solver</title>
+  <style>
+    body {
+      background: #0d0d0d;
+      color: #00ff00;
+      font-family: monospace;
+      margin: 0;
+      padding: 20px;
+    }
+    h1 { color: #00ff00; }
+    textarea {
+      width: 100%;
+      height: 200px;
+      background: black;
+      color: #00ff00;
+      border: 1px solid #00ff00;
+      padding: 10px;
+      font-family: monospace;
+      font-size: 1em;
+    }
+    button {
+      background: black;
+      border: 1px solid #00ff00;
+      color: #00ff00;
+      padding: 10px 20px;
+      margin-top: 10px;
+      cursor: pointer;
+      font-family: monospace;
+    }
+    button:hover { background: #003300; }
+    .output {
+      margin-top: 20px;
+      padding: 10px;
+      border: 1px solid #00ff00;
+      white-space: pre-wrap;
+    }
+  </style>
+</head>
+<body>
+  <h1>ATM Hack Step-by-Step Solver</h1>
+  <p>Paste your <b>latest terminal output</b> and press <b>Next Step</b>.</p>
+
+  <textarea id="terminalInput" placeholder="Paste ATM terminal output here..."></textarea><br>
+  <button onclick="solveStep()">Next Step</button>
+
+  <div id="solverOutput" class="output"></div>
+
+  <script>
+    function solveStep() {
+      const input = document.getElementById("terminalInput").value;
+      const output = document.getElementById("solverOutput");
+      output.textContent = "";
+
+      const ipFile = (input.match(/69\s+([A-Za-z0-9_.]+)/) || [])[1];
+      const ipMatch = (input.match(/IP address is ([\d.]+)/) || [])[1];
+      const portMatch = (input.match(/(\d+)\s+open\s+ssh/) || [])[1];
+
+      // find money file = length 10 but not Twitter/Garage
+      let moneyFile = null;
+      const files10 = [...input.matchAll(/10\s+([A-Za-z0-9_.]+)/g)].map(m => m[1]);
+      for (const f of files10) {
+        if (!["Twitter.exe","Garage.exe"].includes(f)) {
+          moneyFile = f;
+        }
+      }
+
+      // Stage 1: Boot done, no ls yet
+      if (input.includes("anon@echo:~$") && !input.includes("ls")) {
+        output.textContent = "👉 Type:\n\nls";
+        return;
+      }
+
+      // Stage 2: ls output, detect ipFile (69)
+      if (ipFile && input.includes("ls") && !input.includes("Accessing data obtained")) {
+        output.textContent = `👉 Type:\n\n${ipFile}\n\n(This reveals the ATM's IP)`;
+        return;
+      }
+
+      // Stage 3: After ipFile reveals IP
+      if (ipMatch && !input.includes("nmap")) {
+        output.textContent = `👉 Type:\n\nnmap ${ipMatch}`;
+        return;
+      }
+
+      // Stage 4: After nmap shows port
+      if (ipMatch && portMatch && !input.includes("sshnuke")) {
+        output.textContent = `👉 Type:\n\nsshnuke ${ipMatch} -port=${portMatch}`;
+        return;
+      }
+
+      // Stage 5: After sshnuke exploit
+      if (input.includes("Exploit complete") && !input.includes("scp")) {
+        output.textContent = `👉 Type:\n\nscp ${ipFile} root@${ipMatch}:${portMatch}`;
+        return;
+      }
+
+      // Stage 6: After scp transfer
+      if (input.includes("transfered to") && !input.includes("ssh root")) {
+        output.textContent = `👉 Type:\n\nssh root@${ipMatch}:${portMatch}`;
+        return;
+      }
+
+      // Stage 7: After ssh root connection
+      if (input.match(/root@\d+\.\d+\.\d+\.\d+:/) && moneyFile) {
+        output.textContent = `👉 Type:\n\n${moneyFile}\n\n💸 This will complete the hack!`;
+        return;
+      }
+      // Stage 8: After hack complete
+      if (input.includes("Complete! Bye bye")) {
+        output.textContent = "✅ Hack complete! You're done.";
+        return;
+      }
+
+      output.textContent = "⚠️ Could not detect next step.\nPaste the most recent output.";
+    }
+  </script>
+</body>
+</html>
