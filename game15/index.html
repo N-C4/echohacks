@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Echo Minigames Selector</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.2/css/all.min.css" integrity="sha512-1sCRPdkRXhBV2PBLUdRb4tMg1w2YPf37qatUFeS7zlBy7jJI8Lf4VHwWfZZfpXtYSLy85pkm9GaYVYMfw5BC1A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Simple menu to select and launch a minigame using the exact echo_minigames_1 files -->
+  <div id="menu" class="menu">
+    <div class="menu-title"><i class="fa-solid fa-gamepad"></i> Select Minigame</div>
+    <div class="menu-buttons">
+      <button class="menu-btn" data-game="path"><i class="fa-solid fa-laptop-code"></i> Path</button>
+      <button class="menu-btn" data-game="spot"><i class="fa-solid fa-file-shield"></i> Spot</button>
+      <button class="menu-btn" data-game="math"><i class="fa-solid fa-server"></i> Math</button>
+    </div>
+    <div class="menu-subtitle">Presets</div>
+    <div class="menu-buttons">
+      <button class="menu-btn" data-scenario="containers" data-level="1"><i class="fa-solid fa-box"></i> Containers L1</button>
+      <button class="menu-btn" data-scenario="containers" data-level="2"><i class="fa-solid fa-boxes-stacked"></i> Containers L2</button>
+      <button class="menu-btn" data-scenario="containers" data-level="3"><i class="fa-solid fa-warehouse"></i> Containers L3</button>
+      <button class="menu-btn" data-scenario="crypto-heist"><i class="fa-solid fa-coins"></i> Crypto Heist</button>
+      <button class="menu-btn" data-scenario="server-room"><i class="fa-solid fa-database"></i> Server Room</button>
+    </div>
+    <div class="menu-hint">Press ESC during a game to cancel</div>
+  </div>
+
+  <!-- Original echo_minigames_1 HTML below (unchanged structure) -->
+  <div id="screen" style="display: none;">
+    <div class="screen-icon"></div>
+    <div class="screen-text"></div>
+  </div>
+
+  <div id="path-container" style="display: none;">
+    <div id="path-game-container">
+      <div id="path-grid"></div>
+      <div id="path-timer-container" class="timer-container">
+        <div id="path-timer-bar-outer" class="timer-outer">
+          <div id="path-timer-bar-inner" class="timer-inner"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div id="spot-container" style="display: none;">
+    <div id="spot-target" style="display: none;"></div>
+    <div id="spot-grid" style="display: none;"></div>
+
+    <div id="spot-timer-container" class="timer-container" style="display: none;">
+      <div id="spot-timer-bar-outer" class="timer-outer">
+        <div id="spot-timer-bar-inner" class="timer-inner"></div>
+      </div>
+    </div>
+  </div>
+
+  <div id="math-container" style="display: none;">
+    <div id="math-grid"></div>
+    <div id="math-buttons">
+      <div id="math-clear" class="math-button">Clear</div>
+      <div id="math-submit" class="math-button">Submit</div>
+    </div>
+    <div id="math-timer-container" class="timer-container">
+      <div id="math-timer-bar-outer" class="timer-outer">
+        <div id="math-timer-bar-inner" class="timer-inner"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="./js/path.js"></script>
+  <script src="./js/spot.js"></script>
+  <script src="./js/math.js"></script>
+  <script src="./js/main.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&display=swap');
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { background: #0b0e16; overflow: hidden; }
+
+.appContainer { position: absolute; inset: 0; display:flex; align-items:center; justify-content:center; }
+
+.secBypass {
+  display: flex; flex-direction: column;
+  filter: drop-shadow(0px 32px 64px rgba(0,0,0,.37)) drop-shadow(0px 2px 21px rgba(0,0,0,.37));
+  border: 1px solid rgba(117,117,117,.4); border-bottom: 0; border-radius: 7px;
+  width: 65%; height: 65%;
+  background: url('./source/Images/ShellBase.png');
+}
+
+.header { display:flex; flex-direction:row; padding: 16px 27px 16px 32px; }
+.logoName { display:flex; flex-direction:row; align-items:center; gap: 15px; }
+.logoName img { width: 32px; height: 32px; }
+.logoName span { font-family: 'Oswald', sans-serif; font-weight: 400; font-size: 19px; color: rgba(255,255,255,.9); }
+.appControls { display:flex; flex-direction:row; margin-left:auto; align-items:flex-end; margin-bottom:10px; gap:25px; }
+.appControls svg { cursor: pointer; }
+
+/* Loading / spinner */
+.spinnerContainer { width: 100%; height: calc(100% - 72px); display:flex; align-items:center; justify-content:center; }
+.loadingTextContainer { display:flex; flex-direction:column; padding: 40px 37px 69px 32px; height: calc(100% - 72px); color: #fff; font-family: 'Oswald', sans-serif; }
+.loadingTextContainer span { line-height: 38px; }
+
+/* Hack screen */
+.hackContainer { display:flex; flex-direction:column; align-items:center; height: calc(100% - 72px); padding: 24px 32px; color:#fff; font-family:'Oswald', sans-serif; text-transform: uppercase; letter-spacing: 2px; }
+.targetList { display:flex; gap: 6px; font-size: 22px; margin-bottom: 12px; justify-content:center; width:100%; }
+.timer { font-size: 10px; margin-bottom: 16px; display:flex; justify-content:center; width:100%; }
+.numberGrid { display:flex; flex-direction:column; gap: 2px; margin-top: 10px; width:100%; }
+.numberGrid .row { display:flex; flex-direction:row; gap: 8px; justify-content:center; }
+.numberGrid .cell { width: 32px; text-align:center; color: rgba(255,255,255,.45); transition: color .2s ease; }
+.numberGrid .cell.active { color: #fff; }
+.controls { margin-top:auto; opacity:.9; }
+
+/* Helpers */
+.center { display:flex; align-items:center; justify-content:center; }

@@ -6,6 +6,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>FiveM Skillchecks</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto:400,500,700&display=swap" rel="stylesheet" />
+  <link rel="preconnect" href="https://cdnjs.cloudflare.com" crossorigin>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <style>
     /* Inline override: display result rows as flex with button inline */
@@ -23,69 +25,91 @@
 </head>
 <body>
   <header>
-    <h1>EchoRP Hacks</h1>
+    <h1>Hacks</h1>
+    <p style="opacity:.8; margin-top:6px">Choose a minigame to launch</p>
   </header>
 
-  <main class="container">
-    <div class="card" onclick="navigateTo('game1/index.html')">
+  <section class="toolbar">
+    <div class="search">
+      <i class="fa-solid fa-magnifying-glass"></i>
+      <input id="gameSearch" type="text" placeholder="Search games..." />
+    </div>
+    <div class="actions">
+      <button onclick="toggleSentenceHelper()"><i class="fa-solid fa-font"></i> Paleto Sentence Helper</button>
+      <button onclick="toggleStoreHelper()"><i class="fa-solid fa-store"></i> Store Code Cracker</button>
+    </div>
+  </section>
+
+  <main class="container" id="gameGrid">
+    <div class="card" data-title="Fleeca Green Card" data-tags="fleeca colors shapes candy" onclick="navigateTo('game1/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-id-card"></i></div>
       <h3>Fleeca Green Card</h3>
-      <p>Greencard hack for Fleeca Banks. Click on different colors/shapes. Like Candy Crush!</p>
+      <p>Click matching colors and shapes.</p>
     </div>
-    <div class="card" onclick="navigateTo('game3/index.html')">
-      <h3>Fleeca Red Dot Game</h3>
-      <p>Click the red dot's and enter the letter</p>
+    <div class="card" data-title="Fleeca Red Dot" data-tags="fleeca dots letters" onclick="navigateTo('game3/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-crosshairs"></i></div>
+      <h3>Fleeca Red Dot</h3>
+      <p>Click the red dots and type letters.</p>
     </div>
-    <!-- <div class="card" onclick="">
-      <h3>Fleeca Icon Game</h3>
-      <p>Count the icon falling (BROKEN)</p>
-    </div> -->
-    <div class="card" onclick="navigateTo('game6/index.html')">
+    <div class="card" data-title="Interception" data-tags="icons count" onclick="navigateTo('game14/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+      <h3>Fleeca Icons</h3>
+      <p>Count the selected symbols.</p>
+    </div>
+    <div class="card" data-title="Fleeca Teller Door" data-tags="fleeca keypad" onclick="navigateTo('game6/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-door-closed"></i></div>
       <h3>Fleeca Teller Door</h3>
-      <p>Keypad to open teller door</p>
+      <p>Numeric keypad entry.</p>
     </div>
-    <div class="card" onclick="navigateTo('game9/index.html')">
+    <div class="card" data-title="Fleeca Teller Computer" data-tags="fleeca computer" onclick="navigateTo('game9/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-computer"></i></div>
       <h3>Fleeca Teller Computer</h3>
-      <p></p>
+      <p>Terminal interaction.</p>
     </div>
-    <div class="card" onclick="navigateTo('game4/index.html')">
+    <div class="card" data-title="Store Hack" data-tags="store numbers order" onclick="navigateTo('game4/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-list-ol"></i></div>
       <h3>Store Hack</h3>
-      <p>Click 1 to 20 while numbers change position</p>
+      <p>Click 1–20 while numbers shuffle.</p>
     </div>
-    <div class="card" onclick="toggleStoreHelper()">
-      <h3>Store Code Cracker</h3>
-      <p>Brute-force helper for 4-digit store codes</p>
-    </div>
-    <div class="card" onclick="navigateTo('game5/index.html')">
+    <div class="card" data-title="Thermite" data-tags="thermite memory" onclick="navigateTo('game5/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-fire"></i></div>
       <h3>Thermite</h3>
-      <p></p>
+      <p>Pattern recall under pressure.</p>
     </div>
-    <div class="card" onclick="navigateTo('game7/index.html')">
+    <div class="card" data-title="G6 Purple Card" data-tags="g6 purple" onclick="navigateTo('game7/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-credit-card"></i></div>
       <h3>G6 Purple Card</h3>
-      <p></p>
+      <p>Security card challenge.</p>
     </div>
-    <div class="card" onclick="navigateTo('game8/index.html')">
+    <div class="card" data-title="Color Hack" data-tags="color drill" onclick="navigateTo('game8/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-palette"></i></div>
       <h3>Color Hack</h3>
-      <p>Old Fleeca Drill Hack</p>
+      <p>Old Fleeca drill mini.</p>
     </div>
-    <div class="card" onclick="navigateTo('game2/index.html')">
+    <div class="card" data-title="New Game" data-tags="misc" onclick="navigateTo('game2/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-gamepad"></i></div>
       <h3>New Game</h3>
-      <p>Unknown Location</p>
+      <p>Unknown location.</p>
     </div>
-    <div class="card" onclick="navigateTo('game11/index.html')">
+    <div class="card" data-title="Snake Game" data-tags="snake containers pac" onclick="navigateTo('game11/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-square"></i></div>
       <h3>Snake Game</h3>
-      <p>Containers/PAC</p>
+      <p>Containers/PAC.</p>
     </div>
-    <div class="card" onclick="toggleSentenceHelper()">
-      <h3>Paleto Sentence Helper</h3>
-      <p>For Paleto Hack</p>
-    </div>
-    <div class="card" onclick="navigateTo('game12/index.html')">
+    <div class="card" data-title="Vangies Roof Hack" data-tags="vangies" onclick="navigateTo('game12/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-building"></i></div>
       <h3>Vangies Roof Hack</h3>
-      <p>PRO HAXXOR</p>
+      <p>Pro haxxor.</p>
     </div>
-    <div class="card" onclick="navigateTo('game13/index.html')">
-      <h3>Vangies Roof Hack Solver</h3>
-      <p>The Solver</p>
+    <div class="card" data-title="Vangies Solver" data-tags="solver vangies" onclick="navigateTo('game13/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-wand-magic-sparkles"></i></div>
+      <h3>Vangies Solver</h3>
+      <p>Automatic solver.</p>
+    </div>
+    <div class="card" data-title="Boosting Hack" data-tags="secbypass boosting" onclick="navigateTo('game16/index.html')">
+      <div class="card-icon"><i class="fa-solid fa-car"></i></div>
+      <h3>Boosting Hack</h3>
+      <p>SecBypass grid navigator.</p>
     </div>
   </main>
 
@@ -132,5 +156,19 @@
 
   <script src="script.js"></script>
   <script src="sentenceUnscramble.js"></script>
+  <script>
+    // Simple search filter
+    const search = document.getElementById('gameSearch');
+    const grid = document.getElementById('gameGrid');
+    const cards = () => Array.from(grid.querySelectorAll('.card'));
+    function applyFilter() {
+      const q = (search.value || '').toLowerCase();
+      cards().forEach(card => {
+        const t = (card.getAttribute('data-title')||'') + ' ' + (card.getAttribute('data-tags')||'');
+        card.style.display = t.toLowerCase().includes(q) ? '' : 'none';
+      });
+    }
+    if (search) search.addEventListener('input', applyFilter);
+  </script>
 </body>
 </html>
